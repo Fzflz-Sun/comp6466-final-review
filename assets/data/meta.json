@@ -32,8 +32,8 @@
    "week": "W7",
    "title_en": "Balanced BST: AVL Trees",
    "title_zh": "平衡二叉搜索树：AVL 树",
-   "desc_en": "Height-balanced trees, balance factors, the four rotations and the O(log n) bound.",
-   "desc_zh": "高度平衡树、平衡因子、四种旋转以及 O(log n) 高度界。"
+   "desc_en": "Height-balanced trees, balance factors, the four rotations and the \\(O(\\log n)\\) bound.",
+   "desc_zh": "高度平衡树、平衡因子、四种旋转以及 \\(O(\\log n)\\) 高度界。"
   },
   {
    "id": "heap",
@@ -77,8 +77,8 @@
    "week": "W11–W12",
    "title_en": "Dynamic Programming",
    "title_zh": "动态规划",
-   "desc_en": "Optimal substructure, overlapping subproblems, rod cutting, LIS/LCS, games, coin change and subset sum.",
-   "desc_zh": "最优子结构、重叠子问题、钢条切割、LIS/LCS、博弈、找零与子集和。"
+   "desc_en": "Optimal substructure, overlapping subproblems, rod cutting, \\(LIS/LCS\\), games, coin change and subset sum.",
+   "desc_zh": "最优子结构、重叠子问题、钢条切割、\\(LIS/LCS\\)、博弈、找零与子集和。"
   }
  ],
  "kp_count": 68

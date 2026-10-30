@@ -69,7 +69,7 @@
         <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;justify-content:space-between">
           <div style="max-width:70ch">
             <div class="eyebrow">${D.esc(D.txt(p.title_en, p.title_zh))}</div>
-            <p style="margin:0 0 6px">${D.esc(D.txt(p.desc_en, p.desc_zh))}</p>
+            <p style="margin:0 0 6px">${D.inline(D.txt(p.desc_en, p.desc_zh))}</p>
             <p class="small muted" style="margin:0">${D.ui(
               "Answers are hidden by default. Write your answer first, reveal the model answer, then mark the question as “got it” or “review”. The score is self-assessed.",
               "答案默认隐藏。先独立作答，再显示参考答案，然后把题目标记为“已掌握”或“待复习”。分数由自评得出。"

@@ -22,7 +22,7 @@
       <ul class="side-list">
         ${chapters.map((c) => `
           <li><a href="#ch-${c.id}" data-ch="${c.id}">
-            <span>${D.esc(txtTitle(c))}</span><span class="count" data-count="${c.id}">${kps.filter((k) => k.chapter === c.id).length}</span>
+            <span>${D.inline(txtTitle(c))}</span><span class="count" data-count="${c.id}">${kps.filter((k) => k.chapter === c.id).length}</span>
           </a></li>`).join("")}
       </ul>
       <h4>${ui("How to read", "阅读方式")}</h4>
@@ -48,14 +48,14 @@
           <section class="chapter-block" id="ch-${c.id}" data-chapter="${c.id}">
             <div class="ch-head">
               <div class="num">${ui("Chapter", "第")} ${c.num} ${ui("·", "章 ·")} ${c.week}</div>
-              <h2>${D.esc(title(c.title_en, c.title_zh))}</h2>
-              <p class="muted" style="margin:0;max-width:70ch">${D.esc(D.txt(c.desc_en, c.desc_zh))}</p>
+              <h2>${D.inline(title(c.title_en, c.title_zh))}</h2>
+              <p class="muted" style="margin:0;max-width:70ch">${D.inline(D.txt(c.desc_en, c.desc_zh))}</p>
             </div>
             ${all.map((k, i) => `
                 <article class="kp" id="kp-${k.id}" data-chapter="${c.id}">
                   <div class="kp-head">
                     <span class="kp-num">${c.num}.${i + 1}</span>
-                    <h3>${D.esc(title(k.title_en, k.title_zh))}</h3>
+                    <h3>${D.inline(title(k.title_en, k.title_zh))}</h3>
                   </div>
                   <div class="body">${D.bi(k.body_en, k.body_zh)}</div>
                   ${k.exam_en ? `<div class="callout gold"><span class="label">${ui("Exam tip", "考试提示")}</span>${D.bi(k.exam_en, k.exam_zh)}</div>` : ""}

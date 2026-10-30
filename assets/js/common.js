@@ -47,7 +47,28 @@
   }
 
   /* ---------------- markdown ---------------- */
+  function renderTex(tex, display) {
+    if (window.katex) {
+      try {
+        return window.katex.renderToString(tex, {
+          displayMode: !!display,
+          throwOnError: false,
+          strict: "ignore",
+          trust: false,
+        });
+      } catch (e) {
+        if (window.console) console.warn("KaTeX error:", tex, e);
+      }
+    }
+    return `<code class="tex-src">${esc(tex)}</code>`;
+  }
+
   function inline(s) {
+    const maths = [];
+    s = String(s == null ? "" : s).replace(/\\\((.+?)\\\)/g, (m, t) => {
+      maths.push(t);
+      return `\u0002${maths.length - 1}\u0002`;
+    });
     const codes = [];
     s = s.replace(/`([^`]+)`/g, (m, c) => {
       codes.push(c);
@@ -58,6 +79,7 @@
     s = s.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>");
     s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>');
     s = s.replace(/\u0000(\d+)\u0000/g, (m, i) => `<code>${esc(codes[+i])}</code>`);
+    s = s.replace(/\u0002(\d+)\u0002/g, (m, i) => renderTex(maths[+i], false));
     return s;
   }
 
@@ -82,12 +104,26 @@
         out.push(`<pre><code>${esc(buf.join("\n"))}</code></pre>`);
         continue;
       }
+      if (/^\s*\\\[/.test(line)) {
+        let first = line.replace(/^\s*\\\[/, "");
+        const buf = [];
+        i++;
+        if (/\\\]\s*$/.test(first)) {
+          buf.push(first.replace(/\\\]\s*$/, ""));
+        } else {
+          buf.push(first);
+          while (i < lines.length && !/\\\]/.test(lines[i])) buf.push(lines[i++]);
+          if (i < lines.length) { buf.push(lines[i].replace(/\\\]/, "")); i++; }
+        }
+        out.push(`<div class="math-display">${renderTex(buf.join("\n"), true)}</div>`);
+        continue;
+      }
       if (/^\$\$/.test(line)) {
         i++;
         const buf = [];
         while (i < lines.length && !/\$\$/.test(lines[i])) buf.push(lines[i++]);
         i++;
-        out.push(`<div class="formula">${esc(buf.join(" "))}</div>`);
+        out.push(`<div class="math-display">${renderTex(buf.join(" "), true)}</div>`);
         continue;
       }
       const h = line.match(/^(#{1,4})\s+(.*)$/);
@@ -151,6 +187,14 @@
     return `<div class="bi${c}"><div class="lang lang-en">${md(en)}</div><div class="lang lang-zh">${md(zh)}</div></div>`;
   }
 
+  function plain(s) {
+    return String(s == null ? "" : s)
+      .replace(/\\\[([\s\S]*?)\\\]/g, " $1 ")
+      .replace(/\\\((.+?)\\\)/g, " $1 ")
+      .replace(/\\[a-zA-Z]+/g, " ")
+      .replace(/[{}]/g, " ");
+  }
+
   function shortText(s, n) {
     const plain = String(s || "").replace(/```[\s\S]*?```/g, " ").replace(/[#*`>|]/g, " ")
       .replace(/\[(.*?)\]\(.*?\)/g, "$1").replace(/\s+/g, " ").trim();
@@ -160,10 +204,10 @@
   /* ---------------- data ---------------- */
   async function loadData() {
     const files = {
-      meta: "assets/data/meta.json",
-      questions: "assets/data/questions.json",
-      notes: "assets/data/notes.json",
-      exams: "assets/data/exams.json",
+      meta: "assets/data/meta.json?v=2",
+      questions: "assets/data/questions.json?v=2",
+      notes: "assets/data/notes.json?v=2",
+      exams: "assets/data/exams.json?v=2",
     };
     const entries = Object.entries(files);
     const res = await Promise.all(entries.map(([k, url]) => fetch(url).then((r) => {
@@ -385,7 +429,7 @@
       cells.push(`<div class="${cls}">${inner}</div>`);
     }
     return `<div class="scrollx"><div class="hashtable"><div class="ht-row" style="${cols}">${idx.join("")}</div><div class="ht-row" style="${cols}">${cells.join("")}</div></div></div>` +
-      (fig.caption ? `<div class="ht-cap">${esc(fig.caption)}</div>` : "");
+      (fig.caption ? `<div class="ht-cap">${inline(fig.caption)}</div>` : "");
   }
 
   function arrayHTML(fig) {
@@ -402,16 +446,16 @@
     else if (fig.kind === "hashtable") return `<div class="figure-wrap"><div style="padding:12px">${hashHTML(fig)}</div>${fig.caption ? `<div class="figcap">${esc(fig.caption)}</div>` : ""}</div>`;
     else if (fig.kind === "array") inner = arrayHTML(fig);
     else return "";
-    const cap = fig.caption ? `<div class="figcap">${esc(fig.caption)}</div>` : "";
+    const cap = fig.caption ? `<div class="figcap">${inline(fig.caption)}</div>` : "";
     return `<div class="figure-wrap"><div class="scrollx">${inner}</div>${cap}</div>`;
   }
 
   /* ---------------- question cards ---------------- */
   function optionText(o) {
-    if (o.en === o.zh) return `<span>${esc(o.en)}</span>`;
-    if (state.lang === "zh") return `<span>${esc(o.zh)}</span>`;
-    if (state.lang === "both") return `<span>${esc(o.en)}</span><span class="zh">${esc(o.zh)}</span>`;
-    return `<span>${esc(o.en)}</span>`;
+    if (o.en === o.zh) return `<span>${inline(o.en)}</span>`;
+    if (state.lang === "zh") return `<span>${inline(o.zh)}</span>`;
+    if (state.lang === "both") return `<span>${inline(o.en)}</span><span class="zh">${inline(o.zh)}</span>`;
+    return `<span>${inline(o.en)}</span>`;
   }
 
   function questionCard(q, opts) {
@@ -485,14 +529,16 @@
     if (q.answer_figures && q.answer_figures.length) {
       ansHTML += `<div class="answer-figs">` + q.answer_figures.map((af) => {
         const cap = af.caption_en || af.caption_zh
-          ? `<div class="figcap">${esc(txt(af.caption_en, af.caption_zh))}</div>` : "";
+          ? `<div class="figcap">${inline(txt(af.caption_en, af.caption_zh))}</div>` : "";
         return figureHTML(af.fig).replace(/<\/div>$/, cap + "</div>");
       }).join("") + `</div>`;
     }
     if (q.steps_en && q.steps_en.length) {
       const steps = q.steps_en.map((s, i) => {
-        const zh = q.steps_zh && q.steps_zh[i] ? `<span class="zh">${esc(q.steps_zh[i])}</span>` : "";
-        return `<li>${state.lang === "zh" && zh ? esc(q.steps_zh[i]) : esc(s)}${state.lang === "both" && zh ? zh : ""}</li>`;
+        const zhRaw = q.steps_zh && q.steps_zh[i] ? q.steps_zh[i] : "";
+        const zh = zhRaw ? `<span class="zh">${inline(zhRaw)}</span>` : "";
+        if (state.lang === "zh" && zh) return `<li>${inline(zhRaw)}</li>`;
+        return `<li>${inline(s)}${state.lang === "both" ? zh : ""}</li>`;
       }).join("");
       ansHTML += `<ol class="steps">${steps}</ol>`;
     }
@@ -510,8 +556,8 @@
         const ch = state.data.meta && state.data.meta.chapters.find((c) => c.id === k.chapter);
         const title = txt(k.title_en, k.title_zh);
         const tip = txt(k.exam_en, k.exam_zh) || txt(shortText(k.body_en, 150), shortText(k.body_zh, 90));
-        return `<li><div class="kpt"><span>${esc(title)}</span>${ch ? `<span class="tag">${esc(txt(ch.title_en, ch.title_zh))}</span>` : ""}</div>
-          <div class="kpx">${esc(tip)}</div>
+        return `<li><div class="kpt"><span>${inline(title)}</span>${ch ? `<span class="tag">${esc(txt(ch.title_en, ch.title_zh))}</span>` : ""}</div>
+          <div class="kpx">${inline(tip)}</div>
           <a class="kplink" href="notes.html#kp-${k.id}">${ui("Open the note", "查看知识点")} →</a></li>`;
       }).join("") : `<li>${ui("No linked note.", "暂无关联知识点。")}</li>`) + `</ul>`;
     card.appendChild(kpPanel);
@@ -600,7 +646,7 @@
   }
 
   window.DSH = {
-    state, boot, setLang, onLang, ui, txt, esc, el, md, bi, shortText,
+    state, boot, setLang, onLang, ui, txt, esc, el, md, bi, inline, plain, shortText,
     figureHTML, questionCard, mountChrome, toast,
     getProgress, setProgress, readProgress,
     CH_LABEL,

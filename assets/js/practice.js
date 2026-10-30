@@ -27,7 +27,7 @@
       if (S.status === "review" && p !== "review") return false;
       if (S.status === "unseen" && p) return false;
       if (q) {
-        const hay = [x.id, x.topic_en, x.topic_zh, x.stem_en, x.stem_zh, ...(x.options || []).map((o) => o.en + " " + o.zh)]
+        const hay = [x.id, x.topic_en, x.topic_zh, D.plain(x.stem_en), D.plain(x.stem_zh), ...(x.options || []).map((o) => D.plain(o.en) + " " + D.plain(o.zh))]
           .join(" ").toLowerCase();
         if (!hay.includes(q)) return false;
       }

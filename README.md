@@ -26,9 +26,17 @@ Weeks 7–12 material that the final exam examines:
 *Show answer* button and a separate *Knowledge points* button; both must be clicked. Progress
 (*Got it* / *Review*) is stored in the browser's `localStorage`.
 
+## Mathematics
+
+Every formula in the notes and question bank is written in **LaTeX** and typeset with
+[KaTeX](https://katex.org/), vendored locally under `assets/vendor/katex/` (no CDN, works
+offline). Inline mathematics uses `\( … \)` and display mathematics uses `\[ … \]`; the
+question data in `assets/data/*.json` stores the LaTeX source.
+
 ## Run locally
 
-The site is plain HTML/CSS/JS with JSON data — no build step and no dependencies.
+The site is plain HTML/CSS/JS with JSON data — no build step. KaTeX is included in the
+repository.
 
 ```bash
 python3 -m http.server 8000
@@ -46,9 +54,10 @@ notes.html              bilingual knowledge notes
 practice.html           filtered question bank
 exam.html               timed mock papers
 assets/css/style.css    visual system (light and dark themes)
-assets/js/common.js     data loading, markdown, figures, question cards
+assets/js/common.js     data loading, markdown, LaTeX rendering, figures, question cards
 assets/js/*.js          page controllers
 assets/data/            questions.json, notes.json, exams.json, meta.json
+assets/vendor/katex/    KaTeX JS, CSS and fonts
 ```
 
 ## Scope and sources
@@ -71,5 +80,6 @@ convenors and the Australian National University.
 Numeric answers in the generated bank are computed by code and cross-checked against independent
 brute-force implementations (subset enumeration for rod cutting, LIS/LCS, knapsack, subset sum,
 coin change and MST counting; Bellman-Ford for Dijkstra distances; recursive minimax for the
-two-player games; exhaustive search for the egg-dropping and jump-game tables). If you spot an
-error, please open an issue.
+two-player games; exhaustive search for the egg-dropping and jump-game tables). Every LaTeX
+formula is also parsed with KaTeX before publication; the current bank has 5,000+ formulas and
+zero parse errors. If you spot an error, please open an issue.

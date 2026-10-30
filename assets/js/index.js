@@ -65,8 +65,8 @@
             <article class="chapter-card">
               <span class="chapter-badge">${c.num}</span>
               <div class="week">${c.week}</div>
-              <h3>${D.esc(txt(c.title_en, c.title_zh))}</h3>
-              <p>${D.esc(txt(c.desc_en, c.desc_zh))}</p>
+              <h3>${D.inline(txt(c.title_en, c.title_zh))}</h3>
+              <p>${D.inline(txt(c.desc_en, c.desc_zh))}</p>
               <div class="meta">
                 <span><b>${counts[c.id] || 0}</b> ${ui("questions", "题")}</span>
                 <span><b>${kpByChapter[c.id] || 0}</b> ${ui("notes", "知识点")}</span>

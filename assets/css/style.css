@@ -163,6 +163,9 @@ table {
 th, td { text-align: left; padding: 8px 11px; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { background: var(--surface-2); font-weight: 600; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
 tr:last-child td { border-bottom: 0; }
+.math-display { margin: 12px 0 16px; overflow-x: auto; overflow-y: hidden; }
+.math-display .katex-display { margin: 0; }
+.katex { font-size: 1.03em; }
 .formula {
   font-family: var(--mono); font-size: 14px; background: var(--surface-2);
   border: 1px solid var(--line); border-left: 3px solid var(--accent);
