@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" data-lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="335 exam-style COMP3600/6466 practice questions with hidden answers and knowledge-point indexes.">
+  <title>Practice · COMP3600/6466 Algorithms</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/common.js"></script>
+  <script defer src="assets/js/practice.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main>
+    <div class="wrap page-head">
+      <div class="eyebrow" id="practice-eyebrow">Question bank</div>
+      <h1 id="practice-title" style="font-size:clamp(28px,3.4vw,40px);margin-bottom:6px">Practice</h1>
+      <p class="lead" id="practice-lead" style="font-size:16px"></p>
+    </div>
+    <div class="toolbar">
+      <div class="wrap">
+        <div class="toolbar-row">
+          <div class="field"><label for="f-ch" id="lbl-ch">Chapter</label><select class="select" id="f-ch"></select></div>
+          <div class="field"><label for="f-type" id="lbl-type">Type</label>
+            <select class="select" id="f-type">
+              <option value="all">All types</option>
+              <option value="single">Single answer</option>
+              <option value="multi">Select all</option>
+              <option value="workout">Problem solving</option>
+            </select>
+          </div>
+          <div class="field"><label for="f-diff" id="lbl-diff">Difficulty</label>
+            <select class="select" id="f-diff">
+              <option value="all">All levels</option>
+              <option value="1">Warm-up</option>
+              <option value="2">Exam level</option>
+              <option value="3">Challenge</option>
+            </select>
+          </div>
+          <div class="field"><label for="f-status" id="lbl-status">Progress</label>
+            <select class="select" id="f-status">
+              <option value="all">All</option>
+              <option value="got">Got it</option>
+              <option value="review">Review</option>
+              <option value="unseen">Not marked</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1 1 220px"><label for="f-q" id="lbl-q">Search</label>
+            <input class="input search" id="f-q" type="search" placeholder="Search a stem, topic or id…" style="width:100%">
+          </div>
+          <button class="btn" id="btn-shuffle" type="button">Shuffle</button>
+          <button class="btn ghost" id="btn-reset" type="button">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="result-line">
+        <span id="result-count"></span>
+        <span class="progress-pill"><span id="progress-text"></span>
+          <span class="progress-track"><span id="progress-fill" style="width:0%"></span></span>
+        </span>
+      </div>
+      <div id="list"></div>
+      <div id="pager" class="pager"></div>
+    </div>
+  </main>
+  <footer id="site-footer"></footer>
+</body>
+</html>

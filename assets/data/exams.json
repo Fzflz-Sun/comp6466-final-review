@@ -1,0 +1,412 @@
+{
+ "papers": [
+  {
+   "id": "a",
+   "title_en": "Mock Paper A · 2025 format",
+   "title_zh": "模拟卷 A · 2025 题型",
+   "desc_en": "100 marks in 180 minutes: 10 multiple-choice questions (40 marks), then BST, hashing, graph and DP problem-solving questions.",
+   "desc_zh": "180 分钟 100 分：10 道选择题（40 分），以及二叉搜索树、哈希、图与动态规划解答题。",
+   "duration": 180,
+   "total": 100,
+   "sections": [
+    {
+     "title_en": "Question 1 · Multiple choice",
+     "title_zh": "第 1 题 · 单项选择",
+     "marks": 40,
+     "entries": [
+      {
+       "qid": "bst-001",
+       "marks": 4,
+       "label": "a"
+      },
+      {
+       "qid": "avl-024",
+       "marks": 4,
+       "label": "b"
+      },
+      {
+       "qid": "heap-031",
+       "marks": 4,
+       "label": "c"
+      },
+      {
+       "qid": "hash-027",
+       "marks": 4,
+       "label": "d"
+      },
+      {
+       "qid": "graph-006",
+       "marks": 4,
+       "label": "e"
+      },
+      {
+       "qid": "graph-022",
+       "marks": 4,
+       "label": "f"
+      },
+      {
+       "qid": "greedy-001",
+       "marks": 4,
+       "label": "g"
+      },
+      {
+       "qid": "dp-006",
+       "marks": 4,
+       "label": "h"
+      },
+      {
+       "qid": "dp-030",
+       "marks": 4,
+       "label": "i"
+      },
+      {
+       "qid": "dp-029",
+       "marks": 4,
+       "label": "j"
+      }
+     ]
+    },
+    {
+     "title_en": "Question 2 · Binary search trees",
+     "title_zh": "第 2 题 · 二叉搜索树",
+     "marks": 10,
+     "entries": [
+      {
+       "qid": "avl-029",
+       "marks": 10,
+       "label": ""
+      }
+     ]
+    },
+    {
+     "title_en": "Question 3 · Hash tables",
+     "title_zh": "第 3 题 · 哈希表",
+     "marks": 10,
+     "entries": [
+      {
+       "qid": "hash-059",
+       "marks": 10,
+       "label": ""
+      }
+     ]
+    },
+    {
+     "title_en": "Question 4 · Graph algorithms",
+     "title_zh": "第 4 题 · 图算法",
+     "marks": 18,
+     "entries": [
+      {
+       "qid": "graph-035",
+       "marks": 18,
+       "label": ""
+      }
+     ]
+    },
+    {
+     "title_en": "Question 5 · Dynamic programming",
+     "title_zh": "第 5 题 · 动态规划",
+     "marks": 22,
+     "entries": [
+      {
+       "qid": "dp-065",
+       "marks": 12,
+       "label": "a"
+      },
+      {
+       "qid": "dp-067",
+       "marks": 10,
+       "label": "b"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b",
+   "title_en": "Mock Paper B · 2024-style problem set",
+   "title_zh": "模拟卷 B · 2024 风格解答题",
+   "desc_en": "60 marks of problem-solving questions in the 2024 paper's style, including a red-black-free BST section and a 22-mark DP section.",
+   "desc_zh": "按 2024 年风格组卷的 60 分解答题，包括二叉搜索树部分与 22 分动态规划部分。",
+   "duration": 120,
+   "total": 60,
+   "sections": [
+    {
+     "title_en": "Question 1 · Binary search trees",
+     "title_zh": "第 1 题 · 二叉搜索树",
+     "marks": 15,
+     "entries": [
+      {
+       "qid": "bst-047",
+       "marks": 8,
+       "label": "a"
+      },
+      {
+       "qid": "bst-049",
+       "marks": 7,
+       "label": "b"
+      }
+     ]
+    },
+    {
+     "title_en": "Question 2 · Hash functions and probing",
+     "title_zh": "第 2 题 · 哈希函数与探测",
+     "marks": 11,
+     "entries": [
+      {
+       "qid": "hash-056",
+       "marks": 11,
+       "label": ""
+      }
+     ]
+    },
+    {
+     "title_en": "Question 3 · Graph algorithms",
+     "title_zh": "第 3 题 · 图算法",
+     "marks": 12,
+     "entries": [
+      {
+       "qid": "graph-036",
+       "marks": 12,
+       "label": ""
+      }
+     ]
+    },
+    {
+     "title_en": "Question 4 · Dynamic programming",
+     "title_zh": "第 4 题 · 动态规划",
+     "marks": 22,
+     "entries": [
+      {
+       "qid": "dp-066",
+       "marks": 12,
+       "label": "a"
+      },
+      {
+       "qid": "dp-070",
+       "marks": 10,
+       "label": "b"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c",
+   "title_en": "MCQ sprint · 40 questions",
+   "title_zh": "选择题冲刺 · 40 题",
+   "desc_en": "40 single-answer questions drawn from every chapter, one mark each. Good for a timed warm-up.",
+   "desc_zh": "从各章抽取的 40 道单选题，每题 1 分，适合限时热身。",
+   "duration": 60,
+   "total": 40,
+   "sections": [
+    {
+     "title_en": "Multiple choice",
+     "title_zh": "单项选择",
+     "marks": 40,
+     "entries": [
+      {
+       "qid": "bst-001",
+       "marks": 1,
+       "label": "a"
+      },
+      {
+       "qid": "bst-008",
+       "marks": 1,
+       "label": "b"
+      },
+      {
+       "qid": "bst-015",
+       "marks": 1,
+       "label": "c"
+      },
+      {
+       "qid": "bst-022",
+       "marks": 1,
+       "label": "d"
+      },
+      {
+       "qid": "bst-029",
+       "marks": 1,
+       "label": "e"
+      },
+      {
+       "qid": "bst-036",
+       "marks": 1,
+       "label": "f"
+      },
+      {
+       "qid": "bst-044",
+       "marks": 1,
+       "label": "g"
+      },
+      {
+       "qid": "avl-004",
+       "marks": 1,
+       "label": "h"
+      },
+      {
+       "qid": "avl-011",
+       "marks": 1,
+       "label": "i"
+      },
+      {
+       "qid": "avl-018",
+       "marks": 1,
+       "label": "j"
+      },
+      {
+       "qid": "avl-025",
+       "marks": 1,
+       "label": "k"
+      },
+      {
+       "qid": "heap-005",
+       "marks": 1,
+       "label": "l"
+      },
+      {
+       "qid": "heap-012",
+       "marks": 1,
+       "label": "m"
+      },
+      {
+       "qid": "heap-019",
+       "marks": 1,
+       "label": "n"
+      },
+      {
+       "qid": "heap-026",
+       "marks": 1,
+       "label": "o"
+      },
+      {
+       "qid": "heap-034",
+       "marks": 1,
+       "label": "p"
+      },
+      {
+       "qid": "hash-004",
+       "marks": 1,
+       "label": "q"
+      },
+      {
+       "qid": "hash-011",
+       "marks": 1,
+       "label": "r"
+      },
+      {
+       "qid": "hash-018",
+       "marks": 1,
+       "label": "s"
+      },
+      {
+       "qid": "hash-025",
+       "marks": 1,
+       "label": "t"
+      },
+      {
+       "qid": "hash-032",
+       "marks": 1,
+       "label": "u"
+      },
+      {
+       "qid": "hash-039",
+       "marks": 1,
+       "label": "v"
+      },
+      {
+       "qid": "hash-046",
+       "marks": 1,
+       "label": "w"
+      },
+      {
+       "qid": "hash-053",
+       "marks": 1,
+       "label": "x"
+      },
+      {
+       "qid": "graph-001",
+       "marks": 1,
+       "label": "y"
+      },
+      {
+       "qid": "graph-008",
+       "marks": 1,
+       "label": "z"
+      },
+      {
+       "qid": "graph-015",
+       "marks": 1,
+       "label": "{"
+      },
+      {
+       "qid": "graph-022",
+       "marks": 1,
+       "label": "|"
+      },
+      {
+       "qid": "graph-029",
+       "marks": 1,
+       "label": "}"
+      },
+      {
+       "qid": "graph-042",
+       "marks": 1,
+       "label": "~"
+      },
+      {
+       "qid": "greedy-006",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "greedy-013",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "greedy-023",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "greedy-030",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "dp-007",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "dp-014",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "dp-021",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "dp-028",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "dp-035",
+       "marks": 1,
+       "label": ""
+      },
+      {
+       "qid": "dp-042",
+       "marks": 1,
+       "label": ""
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,85 @@
+{
+ "title": "COMP3600/6466 Algorithms — Final Review",
+ "total": 337,
+ "counts": {
+  "bst": 52,
+  "avl": 32,
+  "heap": 41,
+  "hash": 65,
+  "graph": 43,
+  "greedy": 30,
+  "dp": 74
+ },
+ "types": {
+  "single": 297,
+  "multi": 9,
+  "workout": 31
+ },
+ "marks_total": 1449,
+ "chapters": [
+  {
+   "id": "bst",
+   "num": "7",
+   "week": "W7",
+   "title_en": "Binary Search Trees",
+   "title_zh": "二叉搜索树",
+   "desc_en": "Structure, traversal, search, insertion, deletion and the divide-and-conquer patterns used in the final exam.",
+   "desc_zh": "结构、遍历、查找、插入、删除，以及期末考试中出现的分治题型。"
+  },
+  {
+   "id": "avl",
+   "num": "7",
+   "week": "W7",
+   "title_en": "Balanced BST: AVL Trees",
+   "title_zh": "平衡二叉搜索树：AVL 树",
+   "desc_en": "Height-balanced trees, balance factors, the four rotations and the O(log n) bound.",
+   "desc_zh": "高度平衡树、平衡因子、四种旋转以及 O(log n) 高度界。"
+  },
+  {
+   "id": "heap",
+   "num": "8",
+   "week": "W8",
+   "title_en": "Heaps and Priority Queues",
+   "title_zh": "堆与优先队列",
+   "desc_en": "Binary heap structure, heapify, insert/extract-min, linear-time Build-Heap, Heapsort and Fibonacci heaps.",
+   "desc_zh": "二叉堆结构、heapify、插入与提取最小值、线性时间建堆、堆排序以及斐波那契堆。"
+  },
+  {
+   "id": "hash",
+   "num": "9",
+   "week": "W8–W9",
+   "title_en": "Hash Tables",
+   "title_zh": "哈希表",
+   "desc_en": "Hash functions, chaining, universal hashing, perfect hashing and open addressing (linear, quadratic, double).",
+   "desc_zh": "哈希函数、链接法、全域哈希、完美哈希以及开放寻址（线性、二次、双重）。"
+  },
+  {
+   "id": "graph",
+   "num": "10",
+   "week": "W9–W10",
+   "title_en": "Graph Algorithms",
+   "title_zh": "图算法",
+   "desc_en": "Representations, BFS, DFS, topological sort, Dijkstra, minimum spanning trees and Bellman-Ford.",
+   "desc_zh": "图的表示、BFS、DFS、拓扑排序、Dijkstra、最小生成树与 Bellman-Ford。"
+  },
+  {
+   "id": "greedy",
+   "num": "11",
+   "week": "W10",
+   "title_en": "Greedy Algorithms",
+   "title_zh": "贪心算法",
+   "desc_en": "Greedy choice, activity selection, exchange arguments, MST as greedy, and when greed fails.",
+   "desc_zh": "贪心选择、活动选择、交换论证、作为贪心的 MST，以及贪心失效的情形。"
+  },
+  {
+   "id": "dp",
+   "num": "12",
+   "week": "W11–W12",
+   "title_en": "Dynamic Programming",
+   "title_zh": "动态规划",
+   "desc_en": "Optimal substructure, overlapping subproblems, rod cutting, LIS/LCS, games, coin change and subset sum.",
+   "desc_zh": "最优子结构、重叠子问题、钢条切割、LIS/LCS、博弈、找零与子集和。"
+  }
+ ],
+ "kp_count": 68
+}
