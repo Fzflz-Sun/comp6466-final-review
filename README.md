@@ -19,7 +19,7 @@ Weeks 7–12 material that the final exam examines:
 | Section | Contents |
 |---|---|
 | **Notes** | 69 bilingual knowledge cards. Each card has the definition, the key formula or recurrence, and an exam tip. Switch between **EN / 中文 / 双语** in the header. |
-| **Practice** | 339 questions: 308 multiple-select MCQs, 31 long-answer / problem-solving questions. Filter by chapter, type, difficulty or progress; search; shuffle; paginate. |
+| **Practice** | 339 questions: 308 multiple-select MCQs, 31 long-answer / problem-solving questions. Filter by chapter, knowledge point, type, difficulty or progress; search; shuffle; paginate. The filter bar collapses as you scroll down and expands when you scroll up. |
 | **Mock exam** | Three papers: a 100-mark 2025-format paper with multiple-select MCQs, a 60-mark 2024-style problem set, and a 40-question multiple-select sprint. Timers, section marks, automatic MCQ partial credit and a score summary. |
 
 **Answers and knowledge-point indexes are hidden by default.** Each question has a

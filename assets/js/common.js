@@ -222,10 +222,10 @@
   /* ---------------- data ---------------- */
   async function loadData() {
     const files = {
-      meta: "assets/data/meta.json?v=3",
-      questions: "assets/data/questions.json?v=3",
-      notes: "assets/data/notes.json?v=3",
-      exams: "assets/data/exams.json?v=3",
+      meta: "assets/data/meta.json?v=4",
+      questions: "assets/data/questions.json?v=4",
+      notes: "assets/data/notes.json?v=4",
+      exams: "assets/data/exams.json?v=4",
     };
     const entries = Object.entries(files);
     const res = await Promise.all(entries.map(([k, url]) => fetch(url).then((r) => {
