@@ -9,6 +9,7 @@
     remaining: 0,
     timer: null,
     startedAt: 0,
+    autoScores: {},
   };
 
   function papers() { return D.state.data.exams.papers; }
@@ -32,8 +33,16 @@
     const m = loadMarks(p);
     let got = 0, answered = 0;
     p.sections.forEach((s) => s.entries.forEach((e) => {
-      if (m[e.qid] !== undefined) answered++;
-      if (m[e.qid] === "got") got += e.marks;
+      const q = byId(e.qid);
+      if (q && q.type === "multi") {
+        if (state.autoScores[e.qid] !== undefined) {
+          answered++;
+          got += state.autoScores[e.qid];
+        }
+      } else {
+        if (m[e.qid] !== undefined) answered++;
+        if (m[e.qid] === "got") got += e.marks;
+      }
     }));
     return { got, answered, marks: m };
   }
@@ -50,6 +59,7 @@
         if (b.dataset.paper === state.paperId) return;
         stopTimer();
         state.paperId = b.dataset.paper;
+        state.autoScores = {};
         state.started = false;
         state.finished = false;
         state.remaining = paper().duration * 60;
@@ -71,8 +81,8 @@
             <div class="eyebrow">${D.esc(D.txt(p.title_en, p.title_zh))}</div>
             <p style="margin:0 0 6px">${D.inline(D.txt(p.desc_en, p.desc_zh))}</p>
             <p class="small muted" style="margin:0">${D.ui(
-              "Answers are hidden by default. Write your answer first, reveal the model answer, then mark the question as “got it” or “review”. The score is self-assessed.",
-              "答案默认隐藏。先独立作答，再显示参考答案，然后把题目标记为“已掌握”或“待复习”。分数由自评得出。"
+              "Answers are hidden by default. All MCQ are multiple-select: each correct option +M/k, each incorrect option −M/(n−k), minimum 0 per question; the score is computed from your selection after you reveal the answer. Long-answer questions are self-marked.",
+              "答案默认隐藏。所有选择题均为不定项：正确选项每个 +M/k，错误选项每个 −M/(n−k)，每题最低 0 分；显示答案后按所选选项自动计分。解答题由自评给分。"
             )}</p>
           </div>
           <div class="btn-row">
@@ -111,9 +121,26 @@
         const q = byId(e.qid);
         const holder = host.querySelector(`.exam-entry[data-qid="${e.qid}"][data-sec="${si}"] .exam-card-host`);
         if (!holder || !q) return;
-        holder.appendChild(D.questionCard(q, { exam: true, marks: e.marks }));
+        holder.appendChild(D.questionCard(q, {
+          exam: true,
+          marks: e.marks,
+          onScore: q.type === "multi" ? (score) => {
+            state.autoScores[e.qid] = score;
+            updateBar();
+          } : undefined,
+        }));
         const row = D.el("div", "qactions");
         row.style.marginTop = "-4px";
+        if (q.type === "multi") {
+          row.appendChild(D.el("span", "small muted", D.ui(
+            "MCQ score is computed from your selection above.",
+            "选择题分数由上方所选选项自动计算。"
+          )));
+          row.appendChild(D.el("span", "spacer"));
+          row.appendChild(D.el("span", "small muted", D.ui(`worth ${e.marks} marks`, `本题 ${e.marks} 分`)));
+          holder.appendChild(row);
+          return;
+        }
         const mark = D.el("div", "selfmark");
         const got = D.el("button", "", `${D.ui("Got it", "已掌握")} +${e.marks}`);
         got.type = "button";
@@ -165,8 +192,8 @@
     const elP = document.getElementById("exam-progress");
     const elT = document.getElementById("exam-timer");
     if (!elA) return;
-    elA.textContent = D.ui(`${sc.answered}/${total} marked`, `已标记 ${sc.answered}/${total}`);
-    elS.textContent = "· " + D.ui(`${sc.got} / ${p.total} marks`, `${sc.got} / ${p.total} 分`);
+    elA.textContent = D.ui(`${sc.answered}/${total} answered`, `已答 ${sc.answered}/${total}`);
+    elS.textContent = "· " + D.ui(`${D.fmtMark(sc.got)} / ${p.total} marks`, `${D.fmtMark(sc.got)} / ${p.total} 分`);
     elP.style.width = (total ? (sc.answered / total) * 100 : 0).toFixed(1) + "%";
     elT.textContent = fmtTime(state.remaining);
     elT.style.color = state.remaining < 300 ? "var(--bad)" : "var(--accent)";
@@ -213,14 +240,18 @@
     const total = totalEntries(p);
     const rows = p.sections.map((s) => {
       const entryMarks = s.entries.reduce((a, e) => a + e.marks, 0);
-      const got = s.entries.filter((e) => sc.marks[e.qid] === "got").reduce((a, e) => a + e.marks, 0);
-      return `<tr><td>${D.esc(D.txt(s.title_en, s.title_zh))}</td><td>${got}</td><td>${entryMarks}</td></tr>`;
+      const got = s.entries.reduce((a, e) => {
+        const q = byId(e.qid);
+        if (q && q.type === "multi") return a + (state.autoScores[e.qid] || 0);
+        return a + (sc.marks[e.qid] === "got" ? e.marks : 0);
+      }, 0);
+      return `<tr><td>${D.esc(D.txt(s.title_en, s.title_zh))}</td><td>${D.fmtMark(got)}</td><td>${entryMarks}</td></tr>`;
     }).join("");
     document.getElementById("exam-summary").innerHTML = `
       <div class="panel" style="border-left:3px solid var(--accent);margin-bottom:10px">
         <div class="eyebrow">${D.ui("Result", "成绩")}</div>
         <div class="scorebox">
-          <div class="stat"><div class="num">${sc.got}</div><div class="lbl">${D.ui("marks (self-assessed)", "分（自评）")}</div></div>
+          <div class="stat"><div class="num">${D.fmtMark(sc.got)}</div><div class="lbl">${D.ui("marks earned", "得分")}</div></div>
           <div class="stat"><div class="num">${p.total}</div><div class="lbl">${D.ui("total marks", "总分")}</div></div>
           <div class="stat"><div class="num">${sc.answered}</div><div class="lbl">${D.ui(`of ${total} marked`, `已标记 / ${total}`)}</div></div>
           <div class="stat"><div class="num">${fmtTime(p.duration * 60 - state.remaining)}</div><div class="lbl">${D.ui("time used", "用时")}</div></div>
@@ -237,6 +268,7 @@
     if (!confirm(D.ui("Clear the timer and all self-marks for this paper?", "要清除本卷的计时与所有自评标记吗？"))) return;
     stopTimer();
     localStorage.removeItem(markKey(paper()));
+    state.autoScores = {};
     state.remaining = paper().duration * 60;
     state.started = false;
     state.finished = false;
@@ -261,6 +293,7 @@
     renderTabs();
     renderPaper();
     D.onLang(() => {
+      state.autoScores = {};
       renderStatics();
       renderTabs();
       renderPaper();

@@ -195,6 +195,24 @@
       .replace(/[{}]/g, " ");
   }
 
+  function fmtMark(x) {
+    if (!isFinite(x)) return "0";
+    if (Math.abs(x - Math.round(x)) < 1e-9) return String(Math.round(x));
+    return x.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+  }
+
+  function fmtFrac(x) {
+    if (!isFinite(x)) return "0";
+    if (Math.abs(x - Math.round(x)) < 1e-9) return String(Math.round(x));
+    const sign = x < 0 ? "−" : "";
+    const a = Math.abs(x);
+    for (let d = 2; d <= 12; d++) {
+      const n = Math.round(a * d);
+      if (Math.abs(a - n / d) < 1e-9) return sign + n + "/" + d;
+    }
+    return sign + a.toFixed(2);
+  }
+
   function shortText(s, n) {
     const plain = String(s || "").replace(/```[\s\S]*?```/g, " ").replace(/[#*`>|]/g, " ")
       .replace(/\[(.*?)\]\(.*?\)/g, "$1").replace(/\s+/g, " ").trim();
@@ -204,10 +222,10 @@
   /* ---------------- data ---------------- */
   async function loadData() {
     const files = {
-      meta: "assets/data/meta.json?v=2",
-      questions: "assets/data/questions.json?v=2",
-      notes: "assets/data/notes.json?v=2",
-      exams: "assets/data/exams.json?v=2",
+      meta: "assets/data/meta.json?v=3",
+      questions: "assets/data/questions.json?v=3",
+      notes: "assets/data/notes.json?v=3",
+      exams: "assets/data/exams.json?v=3",
     };
     const entries = Object.entries(files);
     const res = await Promise.all(entries.map(([k, url]) => fetch(url).then((r) => {
@@ -467,8 +485,9 @@
     card.dataset.qid = q.id;
 
     const chName = CH_LABEL[q.chapter] ? txt(CH_LABEL[q.chapter][0], CH_LABEL[q.chapter][1]) : q.chapter;
-    const typeName = q.type === "single" ? ui("single answer", "单选")
-      : q.type === "multi" ? ui("select all", "多选") : ui("problem solving", "解答题");
+    const typeName = q.type === "multi" ? ui("multiple select", "不定项选择")
+      : q.type === "single" ? ui("single answer", "单选") : ui("problem solving", "解答题");
+    card.dataset.type = q.type;
     const diffName = [ui("warm-up", "基础"), ui("exam level", "考试难度"), ui("challenge", "挑战")][q.difficulty - 1] || "";
     const head = el("div", "qhead");
     head.innerHTML = `
@@ -489,6 +508,26 @@
       if (fw.firstElementChild) card.appendChild(fw.firstElementChild);
     }
 
+    const nOpts = q.options ? q.options.length : 0;
+    const nCorr = q.answer ? q.answer.length : 0;
+    const posW = nOpts ? marks / Math.max(1, nCorr) : 0;
+    const negW = nOpts > nCorr ? marks / (nOpts - nCorr) : 0;
+    if (nOpts) {
+      const scoring = el("div", "scoring");
+      const counts = ui(
+        `${nCorr} correct, ${nOpts - nCorr} incorrect.`,
+        `${nCorr} 个正确选项，${nOpts - nCorr} 个错误选项。`
+      );
+      const weights = nOpts > nCorr
+        ? ui(
+          `Each correct option: +${fmtFrac(posW)}; each incorrect option: −${fmtFrac(negW)}; minimum 0. Question total: ${marks}.`,
+          `正确选项每个 +${fmtFrac(posW)}；错误选项每个 −${fmtFrac(negW)}；最低 0 分。本题满分 ${marks}。`
+        )
+        : ui(`All options are correct; select all. Question total: ${marks}.`, `所有选项都正确；全选即可。本题满分 ${marks}。`);
+      scoring.innerHTML = `<span class="badge type">${ui("scoring", "计分")}</span><span>${counts} ${weights}</span>`;
+      card.appendChild(scoring);
+    }
+
     let sel = new Set();
     const optionEls = [];
     if (q.options && q.options.length) {
@@ -504,7 +543,7 @@
             if (sel.has(o.key)) sel.delete(o.key); else sel.add(o.key);
           }
           optionEls.forEach((x) => x.classList.toggle("sel", sel.has(x.dataset.key)));
-          if (card.dataset.revealed === "1") paintOptions();
+          if (card.dataset.revealed === "1") { paintOptions(); paintScore(); }
         });
         optionEls.push(b);
         box.appendChild(b);
@@ -545,7 +584,25 @@
     const ansPanel = el("div", "answer-panel");
     ansPanel.hidden = true;
     ansPanel.innerHTML = ansHTML;
+    const scoreLine = el("div", "score-line");
+    ansPanel.insertBefore(scoreLine, ansPanel.firstChild);
     card.appendChild(ansPanel);
+
+    function paintScore() {
+      if (!nOpts) return;
+      let c = 0, w = 0;
+      sel.forEach((k) => { if (q.answer.includes(k)) c++; else w++; });
+      const raw = c * posW - w * negW;
+      const score = Math.max(0, raw);
+      const picked = [...sel].sort().join(", ") || ui("nothing", "未选");
+      const detail = negW > 0
+        ? `${c} × ${fmtFrac(posW)} − ${w} × ${fmtFrac(negW)} = ${fmtFrac(raw)}`
+        : `${c} × ${fmtFrac(posW)} = ${fmtFrac(raw)}`;
+      scoreLine.innerHTML = `<strong>${ui("Your score", "本题得分")}: ${fmtFrac(score)} / ${marks}</strong>` +
+        `<span class="muted">${ui("selected", "已选")}: ${esc(picked)} · ${detail}` +
+        (raw < 0 ? ui(" → floored at 0", "（低于 0，按 0 计）") : "") + `</span>`;
+      if (opts.onScore) opts.onScore(score);
+    }
 
     // knowledge points
     const kpPanel = el("div", "kp-panel");
@@ -576,6 +633,7 @@
       if (show) {
         card.dataset.revealed = "1";
         paintOptions();
+        paintScore();
         card.dataset.seen = "1";
       }
     });
@@ -646,7 +704,7 @@
   }
 
   window.DSH = {
-    state, boot, setLang, onLang, ui, txt, esc, el, md, bi, inline, plain, shortText,
+    state, boot, setLang, onLang, ui, txt, esc, el, md, bi, inline, plain, shortText, fmtMark, fmtFrac,
     figureHTML, questionCard, mountChrome, toast,
     getProgress, setProgress, readProgress,
     CH_LABEL,

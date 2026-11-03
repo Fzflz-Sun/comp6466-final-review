@@ -18,13 +18,27 @@ Weeks 7–12 material that the final exam examines:
 
 | Section | Contents |
 |---|---|
-| **Notes** | 68 bilingual knowledge cards. Each card has the definition, the key formula or recurrence, and an exam tip. Switch between **EN / 中文 / 双语** in the header. |
-| **Practice** | 337 questions: 297 single-answer MCQs, 9 select-all MCQs, 31 long-answer / problem-solving questions. Filter by chapter, type, difficulty or progress; search; shuffle; paginate. |
-| **Mock exam** | Three papers: a 100-mark 2025-format paper, a 60-mark 2024-style problem set, and a 40-question MCQ sprint. Timers, section marks, self-marking and a score summary. |
+| **Notes** | 69 bilingual knowledge cards. Each card has the definition, the key formula or recurrence, and an exam tip. Switch between **EN / 中文 / 双语** in the header. |
+| **Practice** | 339 questions: 308 multiple-select MCQs, 31 long-answer / problem-solving questions. Filter by chapter, type, difficulty or progress; search; shuffle; paginate. |
+| **Mock exam** | Three papers: a 100-mark 2025-format paper with multiple-select MCQs, a 60-mark 2024-style problem set, and a 40-question multiple-select sprint. Timers, section marks, automatic MCQ partial credit and a score summary. |
 
 **Answers and knowledge-point indexes are hidden by default.** Each question has a
 *Show answer* button and a separate *Knowledge points* button; both must be clicked. Progress
 (*Got it* / *Review*) is stored in the browser's `localStorage`.
+
+## Multiple-select marking
+
+Every MCQ is **multiple-select (不定项选择)**: one or more options may be correct. A question
+worth `M` marks with `k` correct options and `n − k` incorrect options awards:
+
+- `+M/k` for each correctly selected option;
+- `−M/(n − k)` for each incorrectly selected option;
+- the question score is `max(0, total)`, so it never goes below zero.
+
+For example, a 1-mark question with 3 correct and 2 incorrect options gives `+1/3` and `−1/2`.
+Selecting one correct and one incorrect option gives `1/3 − 1/2 < 0`, which is recorded as 0;
+selecting two correct and one incorrect gives `2/3 − 1/2 = 1/6`. The site shows the exact
+fractions and computes the score when the answer is revealed.
 
 ## Mathematics
 
@@ -63,9 +77,9 @@ assets/vendor/katex/    KaTeX JS, CSS and fonts
 ## Scope and sources
 
 The notes summarise the COMP3600/6466 lecture slides for Weeks 7–12 and the tutorial patterns.
-The question formats follow the final papers from 2023, 2024 and 2025 (MCQ sections, BST/AVL
-operations, hashing traces, Dijkstra/Kruskal/Prim tables, greedy counterexamples, DP design
-questions). All questions are **newly written** in those formats; they are not reproductions of
+The question formats follow the final papers from 2023, 2024 and 2025 (multiple-select MCQ
+sections, BST/AVL operations, hashing traces, Dijkstra/Kruskal/Prim tables, greedy
+counterexamples, DP design questions). All questions are **newly written** in those formats; they are not reproductions of
 past exam questions.
 
 Two topics that appear in older papers are outside the W7–W12 slides and are therefore not in
@@ -81,5 +95,5 @@ Numeric answers in the generated bank are computed by code and cross-checked aga
 brute-force implementations (subset enumeration for rod cutting, LIS/LCS, knapsack, subset sum,
 coin change and MST counting; Bellman-Ford for Dijkstra distances; recursive minimax for the
 two-player games; exhaustive search for the egg-dropping and jump-game tables). Every LaTeX
-formula is also parsed with KaTeX before publication; the current bank has 5,000+ formulas and
+formula is also parsed with KaTeX before publication; the current bank has 5,075 formulas and
 zero parse errors. If you spot an error, please open an issue.

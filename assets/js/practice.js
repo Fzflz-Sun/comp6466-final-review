@@ -135,6 +135,7 @@
     const p = new URLSearchParams(location.search);
     S.ch = p.get("ch") || "all";
     S.type = p.get("type") || "all";
+    if (S.type === "single") S.type = "multi";
     S.diff = p.get("diff") || "all";
     S.status = p.get("status") || "all";
     S.q = p.get("q") || "";
@@ -156,12 +157,11 @@
     document.getElementById("practice-eyebrow").textContent = D.ui("Question bank", "题库");
     document.getElementById("practice-title").textContent = D.ui("Practice", "练习");
     document.getElementById("practice-lead").innerHTML = D.ui(
-      `Answers and knowledge-point indexes are hidden by default. Attempt the question, then reveal. Use the filters to drill one chapter or one question type.`,
-      `参考答案与知识点索引默认隐藏。先独立作答，再点击显示。可用筛选器专攻某一章或某一题型。`
+      `All multiple-choice questions are multiple-select: one or more options may be correct. Scoring: each correct option +M/k, each incorrect option −M/(n−k), minimum 0 per question (M = marks, k = correct options, n = options). Example: a 1-mark question with 3 correct and 2 incorrect options gives +1/3 and −1/2; selecting one correct and one incorrect scores 0 (floored). Answers and knowledge-point indexes are hidden by default.`,
+      `所有选择题均为不定项选择：可以有一个或多个正确选项。计分规则：正确选项每个 +M/k，错误选项每个 −M/(n−k)，每题最低 0 分（M 为满分，k 为正确选项数，n 为选项总数）。例如 1 分题有 3 个正确、2 个错误选项时，正确每个 +1/3、错误每个 −1/2；只选 1 个正确和 1 个错误得分为 0（低于 0 按 0 计）。参考答案与知识点索引默认隐藏。`
     );
     document.querySelector("#f-type option[value=all]").textContent = D.ui("All types", "全部题型");
-    document.querySelector("#f-type option[value=single]").textContent = D.ui("Single answer", "单项选择");
-    document.querySelector("#f-type option[value=multi]").textContent = D.ui("Select all", "多项选择");
+    document.querySelector("#f-type option[value=multi]").textContent = D.ui("Multiple select", "不定项选择");
     document.querySelector("#f-type option[value=workout]").textContent = D.ui("Problem solving", "解答题");
     document.querySelector("#f-diff option[value=all]").textContent = D.ui("All levels", "全部难度");
     document.querySelector("#f-diff option[value='1']").textContent = D.ui("Warm-up", "基础");

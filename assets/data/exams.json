@@ -2,16 +2,16 @@
  "papers": [
   {
    "id": "a",
-   "title_en": "Mock Paper A · 2025 format",
-   "title_zh": "模拟卷 A · 2025 题型",
-   "desc_en": "100 marks in 180 minutes: 10 multiple-choice questions (40 marks), then BST, hashing, graph and DP problem-solving questions.",
-   "desc_zh": "180 分钟 100 分：10 道选择题（40 分），以及二叉搜索树、哈希、图与动态规划解答题。",
+   "title_en": "Mock Paper A · multiple-select MCQ",
+   "title_zh": "模拟卷 A · 不定项选择题",
+   "desc_en": "100 marks in 180 minutes. All multiple-choice questions are multiple-select with partial credit and negative marking, followed by BST, hashing, graph and DP problem-solving questions.",
+   "desc_zh": "180 分钟 100 分。所有选择题均为不定项选择，少选得部分分、错选倒扣；其后为二叉搜索树、哈希、图与动态规划解答题。",
    "duration": 180,
    "total": 100,
    "sections": [
     {
-     "title_en": "Question 1 · Multiple choice",
-     "title_zh": "第 1 题 · 单项选择",
+     "title_en": "Question 1 · Multiple select",
+     "title_zh": "第 1 题 · 不定项选择",
      "marks": 40,
      "entries": [
       {
@@ -84,7 +84,7 @@
      "marks": 10,
      "entries": [
       {
-       "qid": "hash-059",
+       "qid": "hash-063",
        "marks": 10,
        "label": ""
       }
@@ -153,7 +153,7 @@
      "marks": 11,
      "entries": [
       {
-       "qid": "hash-056",
+       "qid": "hash-060",
        "marks": 11,
        "label": ""
       }
@@ -192,16 +192,16 @@
   },
   {
    "id": "c",
-   "title_en": "MCQ sprint · 40 questions",
-   "title_zh": "选择题冲刺 · 40 题",
-   "desc_en": "40 single-answer questions drawn from every chapter, one mark each. Good for a timed warm-up.",
-   "desc_zh": "从各章抽取的 40 道单选题，每题 1 分，适合限时热身。",
+   "title_en": "MCQ sprint · 40 multiple-select questions",
+   "title_zh": "选择题冲刺 · 40 道不定项",
+   "desc_en": "40 multiple-select questions drawn from every chapter, one mark each, with partial credit and negative marking. Good for a timed warm-up.",
+   "desc_zh": "从各章抽取的 40 道不定项选择题，每题 1 分，少选得部分分、错选倒扣，适合限时热身。",
    "duration": 60,
    "total": 40,
    "sections": [
     {
-     "title_en": "Multiple choice",
-     "title_zh": "单项选择",
+     "title_en": "Multiple select",
+     "title_zh": "不定项选择",
      "marks": 40,
      "entries": [
       {
@@ -235,172 +235,172 @@
        "label": "f"
       },
       {
-       "qid": "bst-044",
+       "qid": "bst-043",
        "marks": 1,
        "label": "g"
       },
       {
-       "qid": "avl-004",
+       "qid": "avl-002",
        "marks": 1,
        "label": "h"
       },
       {
-       "qid": "avl-011",
+       "qid": "avl-009",
        "marks": 1,
        "label": "i"
       },
       {
-       "qid": "avl-018",
+       "qid": "avl-016",
        "marks": 1,
        "label": "j"
       },
       {
-       "qid": "avl-025",
+       "qid": "avl-023",
        "marks": 1,
        "label": "k"
       },
       {
-       "qid": "heap-005",
+       "qid": "heap-002",
        "marks": 1,
        "label": "l"
       },
       {
-       "qid": "heap-012",
+       "qid": "heap-009",
        "marks": 1,
        "label": "m"
       },
       {
-       "qid": "heap-019",
+       "qid": "heap-016",
        "marks": 1,
        "label": "n"
       },
       {
-       "qid": "heap-026",
+       "qid": "heap-023",
        "marks": 1,
        "label": "o"
       },
       {
-       "qid": "heap-034",
+       "qid": "heap-030",
        "marks": 1,
        "label": "p"
       },
       {
-       "qid": "hash-004",
+       "qid": "heap-041",
        "marks": 1,
        "label": "q"
       },
       {
-       "qid": "hash-011",
+       "qid": "hash-007",
        "marks": 1,
        "label": "r"
       },
       {
-       "qid": "hash-018",
+       "qid": "hash-014",
        "marks": 1,
        "label": "s"
       },
       {
-       "qid": "hash-025",
+       "qid": "hash-021",
        "marks": 1,
        "label": "t"
       },
       {
-       "qid": "hash-032",
+       "qid": "hash-028",
        "marks": 1,
        "label": "u"
       },
       {
-       "qid": "hash-039",
+       "qid": "hash-035",
        "marks": 1,
        "label": "v"
       },
       {
-       "qid": "hash-046",
+       "qid": "hash-042",
        "marks": 1,
        "label": "w"
       },
       {
-       "qid": "hash-053",
+       "qid": "hash-049",
        "marks": 1,
        "label": "x"
       },
       {
-       "qid": "graph-001",
+       "qid": "hash-056",
        "marks": 1,
        "label": "y"
       },
       {
-       "qid": "graph-008",
+       "qid": "graph-001",
        "marks": 1,
        "label": "z"
       },
       {
-       "qid": "graph-015",
+       "qid": "graph-008",
        "marks": 1,
        "label": "{"
       },
       {
-       "qid": "graph-022",
+       "qid": "graph-015",
        "marks": 1,
        "label": "|"
       },
       {
-       "qid": "graph-029",
+       "qid": "graph-022",
        "marks": 1,
        "label": "}"
       },
       {
-       "qid": "graph-042",
+       "qid": "graph-029",
        "marks": 1,
        "label": "~"
       },
       {
-       "qid": "greedy-006",
+       "qid": "graph-041",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "greedy-013",
+       "qid": "greedy-005",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "greedy-023",
+       "qid": "greedy-012",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "greedy-030",
+       "qid": "greedy-019",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "dp-007",
+       "qid": "greedy-028",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "dp-014",
+       "qid": "dp-005",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "dp-021",
+       "qid": "dp-012",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "dp-028",
+       "qid": "dp-019",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "dp-035",
+       "qid": "dp-026",
        "marks": 1,
        "label": ""
       },
       {
-       "qid": "dp-042",
+       "qid": "dp-033",
        "marks": 1,
        "label": ""
       }

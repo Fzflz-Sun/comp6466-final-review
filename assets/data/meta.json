@@ -1,21 +1,20 @@
 {
  "title": "COMP3600/6466 Algorithms — Final Review",
- "total": 337,
+ "total": 339,
  "counts": {
   "bst": 52,
   "avl": 32,
   "heap": 41,
-  "hash": 65,
+  "hash": 67,
   "graph": 43,
   "greedy": 30,
   "dp": 74
  },
  "types": {
-  "single": 297,
-  "multi": 9,
+  "multi": 308,
   "workout": 31
  },
- "marks_total": 1449,
+ "marks_total": 1457,
  "chapters": [
   {
    "id": "bst",
@@ -81,5 +80,5 @@
    "desc_zh": "最优子结构、重叠子问题、钢条切割、\\(LIS/LCS\\)、博弈、找零与子集和。"
   }
  ],
- "kp_count": 68
+ "kp_count": 69
 }

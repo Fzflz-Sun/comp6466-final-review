@@ -35,13 +35,13 @@
           <aside class="hero-card">
             <div class="eyebrow" style="margin-bottom:8px">${ui("2025 final format", "2025 年期末结构")}</div>
             <ul class="exam-spec">
-              <li><span>${ui("Multiple choice · 10 × 4", "单项选择 · 10 × 4")}</span><b>40</b></li>
+              <li><span>${ui("Multiple select · 10 × 4", "不定项选择 · 10 × 4")}</span><b>40</b></li>
               <li><span>${ui("Binary search trees", "二叉搜索树")}</span><b>10</b></li>
               <li><span>${ui("Hash tables", "哈希表")}</span><b>10</b></li>
               <li><span>${ui("Graph algorithms", "图算法")}</span><b>18</b></li>
               <li><span>${ui("Dynamic programming", "动态规划")}</span><b>22</b></li>
             </ul>
-            <p class="small muted" style="margin:12px 0 0">${ui("100 marks · 180 minutes · one A4 cheat sheet (both sides)", "100 分 · 180 分钟 · 一张 A4 双面小抄")}</p>
+            <p class="small muted" style="margin:12px 0 0">${ui("100 marks · 180 minutes · one A4 cheat sheet (both sides). MCQ are multiple-select with partial credit and negative marking.", "100 分 · 180 分钟 · 一张 A4 双面小抄。选择题为不定项，少选得部分分、错选倒扣。")}</p>
           </aside>
         </div>
         <div class="stats">
@@ -90,8 +90,7 @@
           <div class="panel">
             <h3 style="margin-bottom:12px">${ui("By question type", "按题型")}</h3>
             <ul class="exam-spec">
-              <li><span>${ui("Single-answer MCQ", "单项选择")}</span><b>${byType.single || 0}</b></li>
-              <li><span>${ui("Select-all MCQ", "多项选择")}</span><b>${byType.multi || 0}</b></li>
+              <li><span>${ui("Multiple-select MCQ", "不定项选择")}</span><b>${byType.multi || 0}</b></li>
               <li><span>${ui("Problem solving / long answer", "解答题 / 长答")}</span><b>${byType.workout || 0}</b></li>
             </ul>
           </div>
@@ -103,7 +102,7 @@
                 <div class="progress-track" style="flex:1;width:auto"><span style="width:${(diff[i] / maxDiff * 100).toFixed(1)}%"></span></div>
                 <b style="font-family:var(--mono);font-size:12px;width:30px;text-align:right">${diff[i]}</b>
               </div>`).join("")}
-            <p class="small muted" style="margin:12px 0 0">${ui("Difficulty follows the finals: application of a known algorithm, then novel DP or proof questions.", "难度对标期末：先考已知算法的应用，再考新的动态规划设计或证明题。")}</p>
+            <p class="small muted" style="margin:12px 0 0">${ui("All MCQ are multiple-select: each correct option +M/k, each incorrect −M/(n−k), minimum 0 per question.", "所有选择题均为不定项：正确选项每个 +M/k，错误选项每个 −M/(n−k)，每题最低 0 分。")}</p>
           </div>
           <div class="panel">
             <h3 style="margin-bottom:12px">${ui("How to use this site", "使用建议")}</h3>
